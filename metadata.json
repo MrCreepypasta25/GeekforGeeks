@@ -1,0 +1,5 @@
+{
+  "name": "Ash Board",
+  "description": "Conversational BI dashboard for marketing performance analytics using Gemini AI.",
+  "requestFramePermissions": []
+}

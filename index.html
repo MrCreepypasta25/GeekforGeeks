@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ash Board Intelligence BI</title>
+    <script>
+      // Suppress benign Vite WebSocket errors that occur when HMR is disabled
+      const originalError = console.error;
+      const originalWarn = console.warn;
+      console.error = (...args) => {
+        if (args[0] && typeof args[0] === 'string' && (args[0].includes('[vite] failed to connect to websocket') || args[0].includes('WebSocket closed without opened'))) return;
+        originalError.apply(console, args);
+      };
+      console.warn = (...args) => {
+        if (args[0] && typeof args[0] === 'string' && args[0].includes('[vite]')) return;
+        originalWarn.apply(console, args);
+      };
+      window.addEventListener('unhandledrejection', (event) => {
+        if (event.reason && event.reason.message && event.reason.message.includes('WebSocket closed without opened')) {
+          event.preventDefault();
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
